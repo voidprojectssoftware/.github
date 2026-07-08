@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/void-hero.svg" alt="Void Projects — an orbital emblem traced from real deep-space probe trajectories" width="840">
+  <img src="./assets/void-hero.svg" alt="Void Projects, an orbital emblem traced from real deep-space probe trajectories" width="100%">
 </div>
 
 <div align="center">
