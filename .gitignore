@@ -1,0 +1,8 @@
+# Browser-preview artifacts (playwright-cli)
+.playwright-cli/
+
+# Node
+node_modules/
+
+# Python
+__pycache__/

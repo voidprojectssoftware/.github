@@ -28,6 +28,7 @@ import { dirname, join } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 const DATA = JSON.parse(readFileSync(join(here, 'trajectories.json'), 'utf8'));
 const CATALOG = JSON.parse(readFileSync(join(here, 'star-catalog.json'), 'utf8'));
+const WORDMARK = JSON.parse(readFileSync(join(here, 'wordmark.json'), 'utf8')); // Inter outlines
 
 // ---- Canvas geometry -------------------------------------------------------
 const W = 1280;
@@ -295,14 +296,15 @@ function sun() {
 }
 
 function wordmark() {
-	const fontStack = "'Segoe UI','Helvetica Neue',Arial,sans-serif";
-	const wy = 502;
-	const ty = 548;
+	// Baked Inter outlines (scripts/build-wordmark.py); each path has its left edge
+	// at x=0 and baseline at y=0, so center it under CX and drop it on its baseline.
+	const w = WORDMARK.wordmark;
+	const t = WORDMARK.tagline;
+	const wy = 500; // wordmark baseline
+	const ty = 546; // tagline baseline
 	return (
-		`<text x="${CX}" y="${wy}" text-anchor="middle" font-family="${fontStack}" font-weight="800" ` +
-		`font-size="76" letter-spacing="7" fill="#eef2ff">VOID PROJECTS</text>` +
-		`<text x="${CX}" y="${ty}" text-anchor="middle" font-family="${fontStack}" font-weight="500" ` +
-		`font-size="19" letter-spacing="6" fill="#95a3c7">AI-CENTRIC PROJECTS FROM A DEVELOPER COLLECTIVE</text>`
+		`<path transform="translate(${f(CX - w.width / 2)} ${wy})" d="${w.d}" fill="#eef2ff"/>` +
+		`<path transform="translate(${f(CX - t.width / 2)} ${ty})" d="${t.d}" fill="#95a3c7"/>`
 	);
 }
 
@@ -314,15 +316,11 @@ const svg =
 	`fill="none" font-family="sans-serif" role="img" ` +
 	`aria-label="Void Projects — real deep-space probe trajectories over the real night sky">` +
 	`<defs>` +
-	`<radialGradient id="bg" cx="50%" cy="44%" r="72%">` +
-	`<stop offset="0%" stop-color="#0c152e"/>` +
-	`<stop offset="60%" stop-color="#080e1f"/>` +
-	`<stop offset="100%" stop-color="#05070f"/>` +
-	`</radialGradient>` +
 	`<filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>` +
 	`<feColorMatrix type="saturate" values="0"/></filter>` +
 	`</defs>` +
-	`<rect width="${W}" height="${H}" fill="url(#bg)"/>` +
+	// Flat deep-space backdrop (matches the site's --background), no vignette.
+	`<rect width="${W}" height="${H}" fill="#0e0e18"/>` +
 	stars.svg +
 	trajectories() +
 	sun() +
