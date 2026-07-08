@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - img "Void Projects" [ref=e5]
+  - generic [ref=e6]:
+    - heading "A developer collective building AI-centric tools." [level=3] [ref=e7]
+    - paragraph [ref=e8]: Every project is named after something you would find out in the void.
+    - paragraph [ref=e9]:
+      - link "Website" [ref=e10] [cursor=pointer]:
+        - /url: "#"
+      - text: ·
+      - link "Docs" [ref=e11] [cursor=pointer]:
+        - /url: "#"
+      - text: ·
+      - link "Blog" [ref=e12] [cursor=pointer]:
+        - /url: "#"
+  - separator [ref=e13]
+  - heading "The work" [level=2] [ref=e14]
+  - paragraph [ref=e15]: "We build the connective tissue for AI agents: the context they read, the skills they run, and the network they reach across. Four projects, one orbit."
+  - table [ref=e16]:
+    - rowgroup [ref=e17]:
+      - row "Project What it is Where" [ref=e18]:
+        - columnheader "Project" [ref=e19]
+        - columnheader "What it is" [ref=e20]
+        - columnheader "Where" [ref=e21]
+      - row "Constellation Transform disjointed, amorphic systems into accessible graphs of knowledge that agents can navigate. Private beta" [ref=e22]:
+        - cell "Constellation" [ref=e23]:
+          - strong [ref=e24]: Constellation
+        - cell "Transform disjointed, amorphic systems into accessible graphs of knowledge that agents can navigate." [ref=e25]
+        - cell "Private beta" [ref=e26]:
+          - emphasis [ref=e27]: Private beta
+      - 'row "Protostar Agent skills that get better the more you use them. The loop: use → sync → refine → suggest → adopt. protostar-cli · registry · docs" [ref=e28]':
+        - cell "Protostar" [ref=e29]:
+          - strong [ref=e30]: Protostar
+        - 'cell "Agent skills that get better the more you use them. The loop: use → sync → refine → suggest → adopt." [ref=e31]'
+        - cell "protostar-cli · registry · docs" [ref=e32]:
+          - link "protostar-cli" [ref=e33] [cursor=pointer]:
+            - /url: "#"
+          - text: ·
+          - link "registry" [ref=e34] [cursor=pointer]:
+            - /url: "#"
+          - text: ·
+          - link "docs" [ref=e35] [cursor=pointer]:
+            - /url: "#"
+      - row "Wormhole A peer-to-peer network so your agent can query a teammate's local context, right inside your harness. wormhole" [ref=e36]:
+        - cell "Wormhole" [ref=e37]:
+          - strong [ref=e38]: Wormhole
+        - cell "A peer-to-peer network so your agent can query a teammate's local context, right inside your harness." [ref=e39]
+        - cell "wormhole" [ref=e40]:
+          - link "wormhole" [ref=e41] [cursor=pointer]:
+            - /url: "#"
+      - row "Space Trash The vibe-coded CLI belt that keeps our own lights on. Firmly space trash, and proud of it. spacetrash" [ref=e42]:
+        - cell "Space Trash" [ref=e43]:
+          - strong [ref=e44]: Space Trash
+        - cell "The vibe-coded CLI belt that keeps our own lights on. Firmly space trash, and proud of it." [ref=e45]
+        - cell "spacetrash" [ref=e46]:
+          - link "spacetrash" [ref=e47] [cursor=pointer]:
+            - /url: "#"
+  - separator [ref=e48]
+  - heading "About the emblem" [level=2] [ref=e49]
+  - paragraph [ref=e50]:
+    - text: The mark above is not stock art. It is the real heliocentric trajectory of five deep-space probes —
+    - strong [ref=e51]: Pioneer 10 & 11, Voyager 1 & 2, and New Horizons
+    - text: — pulled from NASA/JPL HORIZONS, projected onto the ecliptic plane and drawn on a logarithmic radial scale so the inner gravity-assist swirl blooms while the long cruise to the edge of the solar system compresses into the medallion.
+  - paragraph [ref=e52]:
+    - text: It is generated, not drawn, by
+    - code [ref=e53]: scripts/generate-hero.mjs
+    - text: — a self-contained animated SVG, no runtime required.
+  - separator [ref=e54]
+  - subscript [ref=e56]: Void Projects · out here in the dark, building toward the light.
