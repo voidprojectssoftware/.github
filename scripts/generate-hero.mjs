@@ -124,7 +124,7 @@ function trajectories() {
 		const dur = 9 + idx * 1.7;
 		const begin = f(-idx * 2.2);
 		probes +=
-			`<circle r="4" fill="#e2d6ff">` +
+			`<circle r="3.2" fill="#e2d6ff">` +
 			`<animateMotion path="${d}" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>` +
 			`</circle>`;
 
