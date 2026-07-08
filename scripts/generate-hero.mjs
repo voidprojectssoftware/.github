@@ -39,6 +39,7 @@ const R = 208; // emblem outer radius (pixels)
 const MAX_AU = 62; // crop radius; log scale blooms the inner swirl
 const ROT = -16; // global rotation of the emblem (degrees)
 const PURPLE = '#b79cf5'; // brand ink for every trajectory
+const SECS_PER_STEP = 0.05; // animation seconds per telemetry sample (1 month), shared by all probes
 
 const DEG = Math.PI / 180;
 const f = (n) => Math.round(n * 100) / 100;
@@ -119,13 +120,26 @@ function trajectories() {
 			`<path d="${d}" fill="none" stroke="${PURPLE}" stroke-opacity="0.5" stroke-width="1.7" ` +
 			`stroke-linecap="round" stroke-linejoin="round"/>`;
 
-		// A bright dot flying outward from the core along the real journey. Staggered
-		// durations keep the five probes out of lockstep.
-		const dur = 9 + idx * 1.7;
-		const begin = f(-idx * 2.2);
+		// A bright dot flying outward along the real journey. The telemetry points are
+		// equal-time (monthly) samples, so holding each dot to equal time between
+		// points makes its speed track the real spacecraft velocity: quick through the
+		// gravity-assist swirl, slow on the long cruise. keyPoints are the cumulative
+		// distance fractions of each sample; keyTimes are uniform. Every probe shares
+		// SECS_PER_STEP, so they all move at the same pace (longer journeys just run
+		// longer before looping).
+		const n = proj.length;
+		const cum = [0];
+		for (let i = 1; i < n; i++) {
+			cum[i] = cum[i - 1] + Math.hypot(proj[i][0] - proj[i - 1][0], proj[i][1] - proj[i - 1][1]);
+		}
+		const total = cum[n - 1] || 1;
+		const keyPoints = cum.map((c) => (c / total).toFixed(4)).join(';');
+		const keyTimes = proj.map((_, i) => (i / (n - 1)).toFixed(4)).join(';');
+		const dur = f((n - 1) * SECS_PER_STEP);
 		probes +=
 			`<circle r="3.2" fill="#e2d6ff">` +
-			`<animateMotion path="${d}" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>` +
+			`<animateMotion dur="${dur}s" begin="0s" repeatCount="indefinite" calcMode="linear" ` +
+			`keyPoints="${keyPoints}" keyTimes="${keyTimes}" path="${d}"/>` +
 			`</circle>`;
 
 		const [ex, ey] = proj[proj.length - 1];
