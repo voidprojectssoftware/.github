@@ -14,9 +14,9 @@ Every project is named after something you would find out in the void.
 
 
 
-## The work
+## The Projects
 
-We build the connective tissue for AI agents: the context they read, the skills they run, and the network they reach across. Four projects, one orbit.
+We are building the connective tissue for AI agents: the context they read, the skills they run, and the network they reach across.
 
 | Project | What it is | Where |
 | :-- | :-- | :-- |

@@ -104,8 +104,8 @@ function planetRings() {
 }
 
 function trajectories() {
-	let traces = ''; // faint always-on paths
-	let comets = ''; // travelling lit segments
+	let dots = ''; // the trajectory rendered as a row of dots
+	let probes = ''; // a brighter probe travelling outward along each path
 	let ends = ''; // craft current-position dots
 	const shown = DATA.craft.filter((c) => CRAFT_IDS.includes(c.id));
 	shown.sort((a, b) => CRAFT_IDS.indexOf(a.id) - CRAFT_IDS.indexOf(b.id));
@@ -115,25 +115,23 @@ function trajectories() {
 		if (proj.length < 2) return;
 		const d = pathData(proj);
 
-		traces +=
-			`<path d="${d}" fill="none" stroke="${PURPLE}" stroke-opacity="0.5" stroke-width="1.7" ` +
-			`stroke-linecap="round" stroke-linejoin="round"/>`;
+		// Round-cap, near-zero-length dashes render as evenly spaced dots along the
+		// real curve. Gap sets the spacing; stroke-width sets the dot diameter.
+		dots +=
+			`<path d="${d}" fill="none" stroke="${PURPLE}" stroke-opacity="0.62" stroke-width="4.4" ` +
+			`stroke-linecap="round" stroke-dasharray="0.01 12"/>`;
 
-		// A brighter comet that traces the real journey outward from the Sun, on a
-		// normalized path length so the dash math is craft-independent. Staggered
-		// starts keep the five probes out of lockstep.
-		const dur = 7 + idx * 1.4;
-		const begin = f(-idx * 1.9);
-		comets +=
-			`<path d="${d}" fill="none" stroke="#d4c2ff" stroke-width="2.6" pathLength="100" ` +
-			`stroke-linecap="round" stroke-dasharray="16 100">` +
-			`<animate attributeName="stroke-dashoffset" values="115;0" dur="${dur}s" ` +
-			`begin="${begin}s" repeatCount="indefinite"/>` +
-			`<animate attributeName="stroke-opacity" values="0;1;1;0" keyTimes="0;0.08;0.85;1" ` +
-			`dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/></path>`;
+		// A brighter probe dot flying outward from the core along the real journey.
+		// Staggered durations keep the five probes out of lockstep.
+		const dur = 9 + idx * 1.7;
+		const begin = f(-idx * 2.2);
+		probes +=
+			`<circle r="4" fill="#e2d6ff">` +
+			`<animateMotion path="${d}" dur="${dur}s" begin="${begin}s" repeatCount="indefinite"/>` +
+			`</circle>`;
 
 		const [ex, ey] = proj[proj.length - 1];
-		ends += `<circle cx="${f(ex)}" cy="${f(ey)}" r="2.4" fill="${PURPLE}"/>`;
+		ends += `<circle cx="${f(ex)}" cy="${f(ey)}" r="3.4" fill="${PURPLE}"/>`;
 	});
 
 	// The emblem group turns almost imperceptibly, like the galaxy itself.
@@ -142,9 +140,9 @@ function trajectories() {
 		`<animateTransform attributeName="transform" type="rotate" from="0 ${CX} ${CY}" ` +
 		`to="360 ${CX} ${CY}" dur="480s" repeatCount="indefinite"/>` +
 		planetRings() +
-		traces +
-		comets +
+		dots +
 		ends +
+		probes +
 		`</g>`
 	);
 }
