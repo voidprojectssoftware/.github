@@ -1,0 +1,16 @@
+{
+  "name": "voidprojects-github-profile",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Organization profile for Void Projects: the animated hero and its generators.",
+  "type": "module",
+  "scripts": {
+    "hero": "node scripts/generate-hero.mjs",
+    "hero:gif": "node scripts/render-gif.mjs",
+    "wordmark": "python scripts/build-wordmark.py"
+  },
+  "devDependencies": {
+    "gifenc": "^1.0.3",
+    "pngjs": "^7.0.0"
+  }
+}
